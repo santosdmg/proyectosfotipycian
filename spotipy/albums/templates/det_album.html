@@ -1,0 +1,61 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>Album- {{album.title}}</title>
+{%endblock%}
+{% block content%}
+<style type="text/css">
+	.headalbum{
+		padding-top: 20px;
+	}
+	.table-hover tbody tr:hover{
+			color: #09D203;
+			background-color: black;
+		}
+    th{
+      text-align: center;
+    }
+		.table-hover tbody tr td a{
+			padding: 10px;
+			color: white;
+		}
+		.table-hover tbody tr td a:hover{
+			color: #09D203;
+		}
+</style>
+<div class="headalbum row">
+	<div class="col-md-3"><img src="{{album.cover.url}}" width="200" height="200">
+		<p>{{album.artist.first_name}} {{album.artist.last_name}}</p>
+    <p> {{tam}} Cancion(es)</p>
+	</div>
+	
+	<div class="col-md-3"><h1>{{album.title}}</h1></div>
+</div>
+<hr>
+<div class="row">
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Orden</th>
+      <th>Canciones</th>
+      {% if user.is_authenticated and user.is_superuser %}
+      <th>Opciones</th>
+      {%endif%}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    {%for track in tracks%}
+      <th scope="row">{{track.order}}</th>
+      <td style="text-align: left;"><a href="{%url 'track_view' pk=track.pk%}">{{track.name}}</a></td>
+      {% if user.is_authenticated and user.is_superuser %}
+      <td><a href="{%url 'track_edit' pk=track.pk%}"><span class="glyphicon glyphicon-pencil"></span></a> <a href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+      {%endif%}
+    </tr>
+    {%endfor%}
+    
+  </tbody>
+</table>
+</div>
+
+
+{%endblock%}

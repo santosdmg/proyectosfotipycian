@@ -1,0 +1,87 @@
+  {% extends 'page/base.html' %}
+{%block title%}
+	<title>Artist-{{artista.first_name}} {{artista.last_name}}</title>
+{%endblock%}
+{% block content%}
+<style type="text/css">
+		.table-hover tbody tr:hover{
+			color: #09D203;
+			background-color: black;
+		}
+    th{
+      text-align: center;
+    }
+		.table-hover tbody tr td a{
+			padding: 10px;
+			color: white;
+		}
+		.table-hover tbody tr td a:hover{
+			color: #09D203;
+		}
+    .img-art{
+      margin-left: 10px;
+      margin-right: 80px;
+      margin-top: 25px;
+      width: 800px;
+      height: 250px;
+      border-radius: 15px;
+
+    }
+    .divfitimg{
+      background-color: #222;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      padding-left: 50px;
+      padding-right: 50px;
+      margin-top: -50px;
+      margin-left: 10px;
+      margin-right: -10px;
+      opacity: 0.7;
+    }
+    .col-md-10{
+
+      display: inline-block;
+    }
+    .divfitimg h1, .divfitimg p{
+
+      color: white;
+
+    }
+	</style>
+  <div class="col-md-10">
+<img src="{{artista.photography.url}}" class="img-responsive img-art">
+<div class="divfitimg">
+<h1>{{artista.first_name}} {{artista.last_name}}</h1>
+<p style="text-align: left;">{{artista.biography}}</p>
+</div>
+<br>
+<h2>Canciones</h2>
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Orden</th>
+      <th>Canción</th>
+      <th>Album</th>
+      {% if user.is_authenticated and user.is_superuser %}
+      <th>Opciones</th>
+      {%endif%}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    {%for track in trackss%}
+      <th scope="row">{{track.order}}</th>
+      <td style="text-align: left;"><a href="{%url 'track_view' pk=track.pk%}">{{track.name}}</a></td>
+      <td><a href="{%url 'det_album' pk=track.album.pk%}">{{track.album.title}}</a></td>
+      {% if user.is_authenticated and user.is_superuser %}
+      <td><a href="{%url 'track_edit' pk=track.pk%}"><span class="glyphicon glyphicon-pencil"></span></a> <a href="{%url 'track_delete' pk=track.pk%}"><span class="glyphicon glyphicon-remove"></span></a></td>
+      {%endif%}
+    </tr>
+    {%endfor%}
+    
+  </tbody>
+</table>
+</div>
+{% endblock%}

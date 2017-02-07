@@ -1,0 +1,39 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>Registrar usuario</title>
+{%endblock%}
+
+
+{% block content%}
+	<style type="text/css">
+		.divreg{
+			width: 100%;
+			
+			text-align: left;
+		}
+		button, input {
+			color: black;
+		}
+		.divbodyeditalbum{
+		padding: 30px;
+		border-radius: 10px;
+		background-color: #222;
+		margin-bottom: 170px;
+	}
+	</style>
+	<section>
+	<h1>Crear Cuenta</h1>
+	<div class="divreg">
+		<div class="col-md-2"></div>
+		<div class="col-md-5 divbodyeditalbum">
+		<form action="" method="post">
+			{%  csrf_token %}
+			{{form.as_p}}
+			<br>
+			<input type="submit" value="Registrar" name="">
+		</form>
+		</div>
+	</div>
+		
+	</section>
+{%endblock%}

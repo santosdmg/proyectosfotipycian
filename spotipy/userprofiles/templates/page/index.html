@@ -1,0 +1,101 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>Artistas</title>
+{%endblock%}
+
+
+{% block content%}
+	<style type="text/css">
+
+		.diva{
+			text-align: left;
+		}
+		.col-md-4 {
+			display: inline-block;
+			border-radius: 10px;
+			background: black;
+			border: 0px;
+			margin: 20px;
+			padding: 0px;
+			width: 280px;
+			height: 280px;
+			text-align: center;
+		}
+		.col-md-4 divimag{	
+			display: inline-block;
+
+
+		}
+		img{
+			border-radius: 30px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.divpie {
+			padding-top: 13px;
+			color: white;
+			background-color: #222;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+			width: auto;
+			height: auto;
+		}
+
+		.divpie .glyphicon{
+			padding: 10px;
+			font-size: 20px;
+			color: white;
+		}
+		
+		.btnagartist{
+			font-size: 18px;
+			color: white;
+		}
+		.btnagartist:hover{
+			color: #09D203;
+			text-decoration: blink;
+		}
+
+		
+	</style>
+	<br>
+	<br>
+	<h1>Artistas</h1>
+	<div class="diva">
+		{% if user.is_authenticated and user.is_superuser%}
+	<a href="{%url 'new_artist'%}" type="button" class="btnagartist"> <span class="glyphicon glyphicon-plus"></span>  Agregar artista</a> 
+	{%endif%}
+	</div>
+	
+    <div class="row"> 
+
+	{%for artist in artists%}
+		<div class="col-md-4">
+			
+	         <div class="divimag">
+	            
+	                <a href="{%url 'det_artist' pk=artist.pk%}"><img src='{{artist.photography.url}}' class=" " width="250" height="200" align="middle" /></a>
+	           
+	        </div>
+			<div class="divpie">
+			{% if user.is_authenticated and user.is_superuser%}
+	        <h3 class="panel-title encapub"><a href="#">{{artist.first_name}}  {{artist.last_name}}</a></h3>
+	        
+      		<td><a href="{%url 'edit_artist' pk=artist.pk%}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+      		{%else%}
+      		<h3 class="panel-title encapub" style="padding-bottom: 50px;"><a href="#">{{artist.first_name}}  {{artist.last_name}}</a></h3>
+      		{%endif%}
+	        </div>
+				<!--<p>{{artist.biography}}</p>-->
+		</div>
+	{%endfor%}
+	</div>
+
+	
+						
+				
+			
+	
+	
+
+{% endblock%}

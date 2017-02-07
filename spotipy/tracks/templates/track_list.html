@@ -1,0 +1,67 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>Track list</title>
+{%endblock%}
+{% block content%}
+	<style type="text/css">
+		.table-hover tbody tr:hover{
+			color: #09D203;
+			background-color: black;
+		}
+		.table-hover tbody tr td a{
+			padding: 10px;
+			color: white;
+		}
+		.table-hover tbody tr td a:hover{
+			color: #09D203;
+		}
+    th {
+      text-align: center;
+    }
+    .diva{
+      text-align: left;
+    }
+    .btnagrtrack{
+      font-size: 18px;
+      color: white;
+    }
+    .btnagrtrack:hover{
+      color: #09D203;
+      text-decoration: blink;
+    }
+    
+	</style>
+	<h1>Canciones</h1>
+  <div class="diva">
+    {% if user.is_authenticated and user.is_superuser %}
+  <a href="{%url 'track_new'%}" type="button" class="btnagrtrack"> <span class="glyphicon glyphicon-plus"></span>  Agregar track</a> 
+  {%endif%}
+  </div>
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Orden</th>
+      <th>Canción</th>
+      <th>Artista</th>
+      <th>Album</th>
+      {% if user.is_authenticated and user.is_superuser%}
+      <th>Opciones</th>
+      {%endif%}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    {%for track in tracks%}
+      <th scope="row">{{track.order}}</th>
+      <td><a href="{%url 'track_view' pk=track.pk%}">{{track.name}}</a></td>
+      <td><a href="{%url 'det_artist' pk=track.artist.pk%}">{{track.artist.first_name}} {{track.artist.last_name}}</a></td>
+      <td><a href="{%url 'det_album' pk=track.album.pk%}">{{track.album.title}}</a></td>
+      {% if user.is_authenticated and user.is_superuser%}
+      <td><a href="{%url 'track_edit' pk=track.pk%}"><span class="glyphicon glyphicon-pencil"></span></a> <a href="{%url 'track_delete' pk=track.pk%}"><span class="glyphicon glyphicon-remove"></span></a></td>
+      {%endif%}
+    </tr>
+    {%endfor%}
+    
+  </tbody>
+</table>
+{%endblock%}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	{% block title %} {% endblock %}
+	<style type="text/css">
+		
+.body {
+  color: white;
+  background: black;
+}
+.divbody {
+  align-content: center;
+  /*background: #353535;*/
+  background: #111;
+  padding: 5px;
+  margin: 0px;
+  border: 0px;
+}
+.menhorizon{
+  padding: 0px;
+
+  background: #000;
+}
+
+
+/*para la barra vertical*/
+:focus {
+  outline: none;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.side-menu {
+  position: fixed;
+  width: 290px;
+  height: 100%;
+  background-color: black;
+}
+.side-menu .navbar {
+  border: none;
+}
+.side-menu .navbar-header {
+  width: 100%;
+}
+.side-menu .navbar-nav .active a {
+  background-color: transparent;
+  margin-right: -1px;
+}
+.side-menu .navbar-nav li {
+  display: block;
+  width: 100%;
+}
+.side-menu .navbar-nav li a {
+  padding-left: 40px;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+
+}
+.side-menu .navbar-nav li a:hover {
+  padding-left: 40px;
+  background: black;
+  color: #09D203;
+
+}
+.side-menu .navbar-nav li a .glyphicon {
+  padding-right: 10px;
+}
+
+
+/* Main body section */
+.side-body {
+  margin-left: 250px;
+
+}
+
+.divbody{
+  text-align: center;
+  padding-left: 50px;
+}
+.divopus{
+  background: black;
+  margin-top: 20px;
+  padding-left: 35px;
+}
+.divopus li{
+  display: block;
+
+  width: 100%;
+
+}
+.divopus li a{
+  padding: 5px;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+  
+
+}
+.divopus li a .glyphicon{
+  padding-right: 10px;
+  
+
+}
+.divopus li a:hover {
+  
+  background: transparent;
+  color: #09D203;
+  text-decoration: blink;
+
+  
+}
+.headuser{
+  width: 73%;
+  font-size: 18px;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  margin-left: 20px;
+  background-color: #222;
+  color: white;
+  text-align: center;
+}
+.bodyuser{
+  width: 73%;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: -10px;
+  margin-left: 20px;
+  background-color: #333;
+  color: white;
+  text-align: left;
+  word-wrap: break-word; 
+}
+
+.bodyuser a{
+  color: white;
+}
+.bodyuser a:hover{
+  background: transparent;
+  color: #09D203;
+  text-decoration: blink;
+}
+	</style>
+
+</head>
+<body class="body">
+	<!--header-->
+	
+
+<div class="row">
+    <!-- uncomment code for absolute positioning tweek see top comment in css -->
+    <!-- <div class="absolute-wrapper"> </div> -->
+    <!-- Menu -->
+    <div class="side-menu">
+    
+    <nav class="navbar " role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <div class="brand-wrapper">
+            
+
+            <!-- Brand -->
+            <div class="brand-name-wrapper">
+                <a class="navbar-brand" href="{%url 'home'%}">
+                   <img class="img-responsive" src="https://static.platzi.com/static/website/v2/images/kitui/sfotipy_logo.804deebd2b01.png" width="100"alt="">
+                </a>
+            </div>
+
+            
+        </div>
+
+    </div>
+
+    <!-- Main Menu -->
+    <div class="side-menu-container">
+        <ul class="nav navbar-nav">
+            {% if user.is_authenticated%}
+            <li><a href="{%url 'home'%}"><span class="glyphicon glyphicon-user"></span> Artistas</a></li>
+            <li><a href="{%url 'track_list'%}""><span class="glyphicon glyphicon-music"></span> Canciones</a></li>
+
+
+            <li><a href="{%url 'album_list'%}"><span class="glyphicon glyphicon-cd"></span> Álbumes</a></li>
+            {%else%}
+            <li><a href="{%url 'signup'%}"><span class="glyphicon glyphicon-user"></span> Crear Cuenta</a></li>
+            {%endif%}
+
+        </ul>
+        
+    </div><!-- /.navbar-collapse -->
+    
+    
+</nav>
+    {% if user.is_authenticated%}
+    <div class="headuser">
+
+      <span class="material-icons">account_circle</span>    Usuario
+      <br>
+    </div>
+    <div class="bodyuser">
+
+      <i class="material-icons">face</i> <br> {{user.first_name}}, {{user.last_name}}
+      <br><hr style="margin:0px;">
+      <i class="material-icons">perm_identity</i> <br> {{user.username}}
+     <br><hr style="margin:0px;">
+      <i class="material-icons">email</i> {{user.email}}
+      {% if user.is_authenticated and user.is_superuser%}
+      <br><hr style="margin:0px;">
+      <br>
+      
+      <a href="/admin/" ><span class="glyphicon glyphicon-list-alt"></span> Admin</a>
+      {%endif%}
+    </div>
+    {%endif%}
+    <div class="divopus">
+
+            
+            {% if user.is_authenticated%}
+            <li><a href="{%url 'signout'%}"><span class="glyphicon glyphicon-lock"></span> Cerrar Sesión</a></li>
+            {%else%}
+            <li><a href="{%url 'signin'%}"><span class="glyphicon glyphicon-lock"></span> Iniciar Sesión</a></li>
+            {%endif%}
+
+          </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="side-body">
+        <div class="col-sm-12 divbody">
+
+                            {% block content %}
+
+                            {% endblock %}
+                    
+                </div>
+           
+         
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

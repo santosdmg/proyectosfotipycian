@@ -1,0 +1,59 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>Song-{{track.name}}</title>
+{%endblock%}
+{% block content%}
+	<style type="text/css">
+		.bodytrack{
+			padding-top: 50px;
+			text-align: left;
+			width: 461px;
+			height: 700px;
+		}
+		.fittrack{
+			text-align: center;
+			height: 12%;
+			background-color: #222;
+		}
+		.col-md-6{
+			display: inline-block;
+			background-color: #333;
+			height: 500px;
+			margin-top: 50px;
+			margin-bottom: 50px;
+			border-radius: 15px;
+		}
+	</style>
+	<section>
+	<div class="col-md-2"></div>
+	<div class="col-md-6">
+		<div class="bodytrack">
+			<div style="width: auto;">
+			<img src="{{track.album.cover.url}}" width="461" height="280" align="midle">
+
+			</div>
+			<div class="fittrack">
+			<br>
+				<p>
+					{{track.order}}. {{track.artist}} - {{track.name}}
+				</p>
+				
+				<p>
+					{{track.album}}
+				</p>
+				
+			</div>
+				
+				<!--<p>
+					Biografia: {{track.artist.biography}}
+				</p>-->
+				<audio preload controls autoplay style="width: 461px;">
+					<source src="{{track.track_file.url}}" type="audio/mpeg">
+					Your browser does not support the audio element.
+				</audio>
+		</div>
+	</div>
+		
+		
+	</section>
+{%endblock%}

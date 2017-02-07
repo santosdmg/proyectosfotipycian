@@ -1,0 +1,101 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>Albums</title>
+{%endblock%}
+
+{% block content%}
+	<style type="text/css">
+		.diva{
+			text-align: left;
+		}
+		.col-md-4 {
+			display: inline-block;
+			border-radius: 10px;
+			background: black;
+			border: 0px;
+			margin-left: 20px;
+			margin-bottom:50px;
+			padding: 0px;
+			width: 280px;
+			height: 280px;
+			text-align: center;
+		}
+		.col-md-4 divimag{	
+			display: inline-block;
+
+
+		}
+		img{
+			border-radius: 30px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.panel-title{
+			font-size: 25px;
+		}
+		.divpie {
+			padding-top: 13px;
+			color: white;
+			background-color: #222;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+			width: auto;
+			height: auto;
+		}
+
+		.divpie .glyphicon{
+			padding-left: 10px;
+			padding-right: 10px;
+			font-size: 20px;
+			color: white;
+		}
+		.btnagralbum{
+			font-size: 18px;
+			color: white;
+		}
+		.btnagralbum:hover{
+			color: #09D203;
+			text-decoration: blink;
+		}
+		h4 a{
+			font-size: 20px;
+		}
+	</style>
+
+	<br>
+	<br>
+	<h1>Álbumes</h1>	
+
+	<div class="diva">
+		{% if user.is_authenticated and user.is_superuser %}
+	<a href="{%url 'album_new'%}" type="button" class="btnagralbum"> <span class="glyphicon glyphicon-plus"></span>  Agregar album</a> 
+	{%endif%}
+	</div>
+
+	<div class="row"> 
+	{%for album in albums%}
+	<div class="col-md-4">
+
+		<div class="divimag">
+	        <div STYLE="position:absolute; margin-left:14.5px;"><a href="{%url 'det_album' pk=album.pk%}"><img src='http://orig10.deviantart.net/7c59/f/2012/309/8/0/disco_png_by_damnethorne-d5k2vzr.png' class=" " width="250" height="200" align="middle" /></a></div>
+	        <img src='{{album.cover.url}}' class=" " width="250" height="200" align="middle" />
+	           
+	     </div>
+
+
+	     <div class="divpie">
+	        
+	        {% if user.is_authenticated and user.is_superuser%}
+	        <h4 class="panel-title"><a href="{%url 'det_album' pk=album.pk%}">{{album.title}}</a></h4>
+	        <p style="margin-top: 0px;">{{album.artist.first_name}} {{album.artist.last_name}}</p>
+     		 <td><a href="{%url 'album_edit' pk=album.pk%}"><span class="glyphicon glyphicon-pencil"></span></a> </td>
+     		 {%else%}
+     		 <h4 class="panel-title" ><a href="{%url 'det_album' pk=album.pk%}">{{album.title}}</a></h4>
+     		 <p>{{album.artist.first_name}} {{album.artist.last_name}}</p>
+      		{%endif%}
+	     </div>
+	</div>
+	{%endfor%}
+	</div>
+{%endblock%}
+

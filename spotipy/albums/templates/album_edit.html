@@ -1,0 +1,39 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>Editar Album</title>
+{%endblock%}
+{% block content%}
+<style type="text/css">
+	input, select, button, textarea{
+		color: black;
+
+	}
+	#id_cover{
+		color: white;
+	}
+	.divmodf{
+		margin-top:  50px;
+		padding-bottom: 530px;
+	}
+	a {
+		color: #ccc;
+	}
+	.divbodyeditalbum{
+		padding: 30px;
+		border-radius: 10px;
+		background-color: #222;
+	}
+</style>
+<h1>Editar Album</h1>
+<div style="text-align: left;" class="divmodf">
+	<div class="col-md-2"></div>
+	<div class="col-md-6 divbodyeditalbum">
+	<form method="POST" enctype="multipart/form-data">
+		{%csrf_token%}
+		{{form.as_p}}
+		<button type="submit" class="btn">Guardar</button>
+	</form>
+	</div>
+</div>
+
+{%endblock%}

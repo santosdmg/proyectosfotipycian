@@ -1,0 +1,69 @@
+{% extends 'page/base.html' %}
+{%block title%}
+	<title>New Track</title>
+{%endblock%}
+{% block content%}
+<style type="text/css">
+		.form-group input, textarea, select{
+				color: black;
+			}
+		.bodyform {
+			text-align: left;
+			padding-bottom: 230px;
+		}
+		#id_track_file{
+			color: #aaa;
+		}
+		.divbodyeditalbum{
+		padding: 30px;
+		border-radius: 10px;
+		background-color: #222;
+	}
+</style>
+<h1>Nuevo Track</h1>
+	<div class="bodyform">
+		<div class="col-md-2"></div>
+		<div class="col-md-6 divbodyeditalbum">
+		<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="form-group">
+		    <label >Nombre:	</label>
+		    <br>
+		    {{ form.name}}
+	  	</div>
+	  	<div class="form-group">
+		    <label >Orden:	</label>
+		    <br>
+		    {{ form.order}}
+	  	</div>
+	  	<div class="form-group">
+		    <label >Archivo (.mp3):	</label>
+		    <br>
+		    {{ form.track_file}}
+	  	</div>
+	  	<div class="form-group">
+		    <label >Album:	</label>
+		    <br>
+		    {{ form.album}}
+		    {% if user.is_authenticated and user.is_superuser%}
+			<a href="{%url 'album_new'%}" type="button" class="btnagartist" style="margin-left: 10px; color: white"> <span class="glyphicon glyphicon-plus"></span></a> 
+			{%endif%}
+	  	</div>
+	  	<div class="form-group">
+		    <label >Artista:	</label>
+		    <br>
+		    {{ form.artist}} 
+			{% if user.is_authenticated and user.is_superuser%}
+			<a href="{%url 'new_artist'%}" type="button" class="btnagartist" style="margin-left: 10px; color: white"> <span class="glyphicon glyphicon-plus"></span></a> 
+			{%endif%}
+	
+	  	</div>
+		
+
+		<button type="submit" class="save btn btn-default">Guardar</button>
+		</form>
+		</div>
+	</div>
+
+
+{%endblock%}
