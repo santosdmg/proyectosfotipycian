@@ -26,7 +26,7 @@ def new_artist(request):
 			artist= form.save(commit=False)
 			artist.save()
 			return HttpResponseRedirect('/')
-			
+
 	else:
 		form = frmins_artist()
 	return render(request, 'new_artist.html', {'form':form})
@@ -36,7 +36,7 @@ def new_artist(request):
 def edit_artist(request, pk):
 	artist = get_object_or_404(Artist, pk =pk)
 	if request.method == "POST":
-		form = frmins_artist(request.POST, instance=artist)
+		form = frmins_artist(request.POST, request.FILES or None,instance=artist)
 		if form.is_valid():
 			artist = form.save(commit=False)
 			artist.save()

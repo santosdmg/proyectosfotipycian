@@ -21,14 +21,17 @@
 		.table-hover tbody tr td a:hover{
 			color: #09D203;
 		}
+    .divtituloalbum{
+      padding-left: 60px;
+    }
 </style>
 <div class="headalbum row">
-	<div class="col-md-3"><img src="{{album.cover.url}}" width="200" height="200">
+	<div class="col-md-4"><img src="{{album.cover.url}}" width="200" height="200">
 		<p>{{album.artist.first_name}} {{album.artist.last_name}}</p>
     <p> {{tam}} Cancion(es)</p>
 	</div>
 	
-	<div class="col-md-3"><h1>{{album.title}}</h1></div>
+	<div class="col-md-3 divtituloalbum"><h1>{{album.title}}</h1></div>
 </div>
 <hr>
 <div class="row">
@@ -36,7 +39,7 @@
   <thead>
     <tr>
       <th>Orden</th>
-      <th>Canciones</th>
+      <th>Canción</th>
       {% if user.is_authenticated and user.is_superuser %}
       <th>Opciones</th>
       {%endif%}

@@ -21,7 +21,7 @@
 			height: 280px;
 			text-align: center;
 		}
-		.col-md-4 divimag{	
+		.col-md-4 divimag{
 			display: inline-block;
 
 
@@ -46,7 +46,7 @@
 			font-size: 20px;
 			color: white;
 		}
-		
+
 		.btnagartist{
 			font-size: 18px;
 			color: white;
@@ -56,31 +56,31 @@
 			text-decoration: blink;
 		}
 
-		
+
 	</style>
 	<br>
 	<br>
 	<h1>Artistas</h1>
 	<div class="diva">
 		{% if user.is_authenticated and user.is_superuser%}
-	<a href="{%url 'new_artist'%}" type="button" class="btnagartist"> <span class="glyphicon glyphicon-plus"></span>  Agregar artista</a> 
+	<a href="{%url 'new_artist'%}" type="button" class="btnagartist"> <span class="glyphicon glyphicon-plus"></span>  Agregar artista</a>
 	{%endif%}
 	</div>
 	
-    <div class="row"> 
+    <div class="row">
 
 	{%for artist in artists%}
 		<div class="col-md-4">
-			
+
 	         <div class="divimag">
-	            
+
 	                <a href="{%url 'det_artist' pk=artist.pk%}"><img src='{{artist.photography.url}}' class=" " width="250" height="200" align="middle" /></a>
-	           
+
 	        </div>
 			<div class="divpie">
 			{% if user.is_authenticated and user.is_superuser%}
 	        <h3 class="panel-title encapub"><a href="#">{{artist.first_name}}  {{artist.last_name}}</a></h3>
-	        
+
       		<td><a href="{%url 'edit_artist' pk=artist.pk%}"><span class="glyphicon glyphicon-pencil"></span></a></td>
       		{%else%}
       		<h3 class="panel-title encapub" style="padding-bottom: 50px;"><a href="#">{{artist.first_name}}  {{artist.last_name}}</a></h3>
@@ -91,11 +91,11 @@
 	{%endfor%}
 	</div>
 
-	
-						
-				
-			
-	
-	
+
+
+
+
+
+
 
 {% endblock%}

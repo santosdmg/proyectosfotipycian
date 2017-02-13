@@ -13,6 +13,7 @@ class UserCreationEmailForm(UserCreationForm):
                     'username', 
                     'email',
                   )
+		
 
 
 class EmailAuthenticationForm(forms.Form):

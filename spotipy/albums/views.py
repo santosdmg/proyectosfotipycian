@@ -30,7 +30,7 @@ def album_list(request):
 def album_edit(request, pk):
 	album = get_object_or_404(Album, pk =pk)
 	if request.method == "POST":
-		form = fralbum(request.POST, instance=album)
+		form = fralbum(request.POST, request.FILES or None,instance=album)
 		if form.is_valid():
 			album = form.save(commit=False)
 			album.save()

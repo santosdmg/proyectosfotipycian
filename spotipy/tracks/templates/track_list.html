@@ -53,7 +53,7 @@
     <tr>
     {%for track in tracks%}
       <th scope="row">{{track.order}}</th>
-      <td><a href="{%url 'track_view' pk=track.pk%}">{{track.name}}</a></td>
+      <td style="text-align: left;"><a href="{%url 'track_view' pk=track.pk%}">{{track.name}}</a></td>
       <td><a href="{%url 'det_artist' pk=track.artist.pk%}">{{track.artist.first_name}} {{track.artist.last_name}}</a></td>
       <td><a href="{%url 'det_album' pk=track.album.pk%}">{{track.album.title}}</a></td>
       {% if user.is_authenticated and user.is_superuser%}
